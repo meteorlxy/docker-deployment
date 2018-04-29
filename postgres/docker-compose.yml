@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  postgresql:
+    container_name: postgresql
+    image: postgres:latest
+    restart: always
+    volumes:
+      - /srv/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=defaultpassword
+      - POSTGRES_USER
+      - PGDATA
+      - POSTGRES_DB
+      - POSTGRES_INITDB_ARGS
+      - POSTGRES_INITDB_XLOGDIR
+    networks:
+      postgres_network:
+    
+networks:
+  postgres_network:
+    name: postgres_network

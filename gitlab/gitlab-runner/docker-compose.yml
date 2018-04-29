@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  gitlab-runner:
+    container_name: gitlab-runner
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    init: true
+    volumes:
+      - /srv/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - gitlab_network
+
+networks:
+  gitlab_network:
+    name: gitlab_network
+
+# Register the runner:
+# docker exec -it gitlab-runner gitlab-runner register
+
+# See [https://docs.gitlab.com/runner/install/docker.html] for more details

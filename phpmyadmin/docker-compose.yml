@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    hostname: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_ABSOLUTE_URI=http://your.phpmyadmin.url
+    networks:
+      nginx_network:
+      mariadb_network:
+    
+networks:
+  nginx_network:
+    external: true
+    name: nginx_network
+  mariadb_network:
+    external: true
+    name: mariadb_network

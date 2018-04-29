@@ -1,0 +1,26 @@
+version: '2.4'
+
+services:
+  cloud9:
+    container_name: cloud9
+    image: meteorlxy/cloud9:latest
+    restart: always
+    hostname: cloud9
+    volumes:
+      - /path/to/workspace:/workspace
+    environment:
+      C9_LISTEN_PORT: 80
+      C9_WORKSPACE: /workspace
+      C9_AUTH_USER: user
+      C9_AUTH_PASSWORD: password
+    networks:
+      nginx_network:
+      mariadb_network:
+
+networks:
+  nginx_network:
+    external: true
+    name: nginx_network
+  mariadb_network:
+    external: true
+    name: mariadb_network

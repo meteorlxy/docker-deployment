@@ -1,0 +1,14 @@
+version: '2.4'
+
+services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: always
+    hostname: redis
+    networks:
+      - redis_network
+
+networks:
+  redis_network:
+    name: redis_network

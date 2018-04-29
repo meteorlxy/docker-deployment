@@ -1,0 +1,21 @@
+version: '2.4'
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
+    restart: always
+    hostname: mariadb
+    volumes:
+      - /srv/mariadb/data:/var/lib/mysql
+      - /srv/mariadb/logs:/var/log/mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=your@mariadb@password
+    networks:
+      mariadb_network:
+        aliases:
+          - db
+    
+networks:
+  mariadb_network:
+    name: mariadb_network

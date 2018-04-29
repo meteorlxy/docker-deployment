@@ -1,0 +1,18 @@
+version: '2.4'
+
+services:
+  owncloud:
+    container_name: owncloud
+    image: owncloud:latest
+    init: true
+    restart: always
+    hostname: owncloud
+    volumes:
+      - /srv/owncloud:/var/www/html
+    networks:
+      nginx_network:
+
+networks:
+  nginx_network:
+    external: true
+    name: nginx_network

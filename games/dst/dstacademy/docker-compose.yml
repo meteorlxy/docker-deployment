@@ -1,0 +1,35 @@
+version: '2.4'
+
+services:
+  dst_master:
+    image: dstacademy/dontstarvetogether
+    container_name: dst_master
+    hostname: dst_master
+    restart: always
+    tty: true
+    stdin_open: true
+    command: dst-server start --update=all
+    env_file: master.env
+    ports:
+      - 10999:10999/udp
+    volumes:
+      - ./volumes/cluster:/var/lib/dsta/cluster
+    networks:
+      - internal_network
+      
+  dst_cave:
+    image: dstacademy/dontstarvetogether
+    container_name: dst_cave
+    hostname: dst_cave
+    restart: always
+    tty: true
+    stdin_open: true
+    command: dst-server start --update=all
+    env_file: cave.env
+    volumes:
+      - ./volumes/cluster:/var/lib/dsta/cluster
+    networks:
+      - internal_network
+      
+networks:
+  internal_network:

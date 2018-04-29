@@ -1,0 +1,31 @@
+version: '2.4'
+
+services:
+  gitlab:
+    container_name: gitlab
+    image: gitlab/gitlab-ce:latest
+    restart: always
+    hostname: gitlab
+    init: true
+    volumes:
+      - /srv/gitlab/config:/etc/gitlab
+      - /srv/gitlab/logs:/var/log/gitlab
+      - /srv/gitlab/data:/var/opt/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://your.host'
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['proxy_set_headers'] = {'Host' => 'your.host', 'X-Forwarded-Proto' => 'https', 'X-Forwarded-Ssl' => 'on'}
+        gitlab_rails['time_zone'] = 'Beijing'
+        gitlab_rails['initial_root_password'] = 'your@password'
+        gitlab_pages['enable'] = true
+        pages_external_url 'http://your.page.host'
+        registry['enable'] = true
+        registry_external_url 'http://your.registry.host'
+    networks:
+      - gitlab_network
+
+networks:
+  gitlab_network:
+    name: gitlab_network

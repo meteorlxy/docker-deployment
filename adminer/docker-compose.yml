@@ -1,0 +1,23 @@
+version: '2.4'
+
+services:
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    restart: always
+    hostname: adminer
+    networks:
+      nginx_network:
+      mariadb_network:
+      postgres_network:
+    
+networks:
+  nginx_network:
+    external: true
+    name: nginx_network
+  mariadb_network:
+    external: true
+    name: mariadb_network
+  postgres_network:
+    external: true
+    name: postgres_network
