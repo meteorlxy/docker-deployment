@@ -20,7 +20,7 @@ services:
         gitlab_rails['time_zone'] = 'Beijing'
         gitlab_rails['initial_root_password'] = 'your@password'
         gitlab_pages['enable'] = true
-        gitlab_pages['inplace_chroot'] = true = true # https://gitlab.com/gitlab-org/gitlab-pages/issues/129
+        gitlab_pages['inplace_chroot'] = true # https://gitlab.com/gitlab-org/gitlab-pages/issues/129
         pages_external_url 'http://your.page.host'
         registry['enable'] = true
         registry_external_url 'http://your.registry.host'
