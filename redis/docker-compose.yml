@@ -1,14 +1,13 @@
-version: '2.4'
+version: '3.9'
 
 services:
   redis:
-    container_name: redis
     image: redis:alpine
-    restart: always
-    hostname: redis
-    networks:
-      - redis_network
-
-networks:
-  redis_network:
-    name: redis_network
+    ports:
+      - 127.0.0.1:6379:6379
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    command: redis-server --requirepass "password"
